@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main(){
   runApp(MaterialApp(
     title: 'Flutter App',
-    home: TutorialHome(),
+    home: MyButton(),
   ));
 }
 
@@ -35,6 +35,29 @@ class TutorialHome extends StatelessWidget {
         tooltip: 'Add', // used by assistive technologies
         child: Icon(Icons.add),
         onPressed: null,
+      ),
+    );
+  }
+}
+
+class MyButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print('MyButton was tapped!');
+      },
+      child: Container(
+        height: 36.0,
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.lightGreen[500],
+        ),
+        child: Center(
+          child: Text('Engage me'),
+        ),
       ),
     );
   }
