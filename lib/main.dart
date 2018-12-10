@@ -34,14 +34,23 @@ class _CounterState extends State<Counter> {
     // build methods fast, so that you can just rebuild anything that
     // needs updating rather than having to individually change
     // instances of widgets.
-    return Row(
-      children: <Widget>[
-        RaisedButton(
-          onPressed: _increment,
-          child: Text('Increment'),
-        ),
-        Text('Count: $_counter'),
-      ],
+    return Container(
+      height: 36.0,
+      padding: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5.0),
+      color: Colors.lightGreen[500],
+      ),
+      child: Row(
+          children: <Widget>[
+            RaisedButton(
+              onPressed: _increment,
+              child: Text('Increment'),
+            ),
+            Text('Count: $_counter' , style: TextStyle(fontFamily: 'Raleway'),),
+          ],
+        )
     );
   }
 }
