@@ -38,9 +38,25 @@ class CategoryRoute extends StatelessWidget {
     Colors.purpleAccent,
     Colors.red,
   ];
-  
+
+
+Widget _buildCategoryWidgets(List<Widget> categories){
+  return ListView.builder(itemBuilder: (BuildContext context, int index) => categories[index],
+      itemCount: categories.length,
+  );
+}
+
+
   @override
   Widget build(BuildContext context) {
+
+    final categories = <Category>[];
+
+    for(var i = 0; i < _categoryNames.length; i++){
+      categories.add(Category(name: _categoryNames[i],
+          color: _baseColors[i],
+          iconLocation: Icons.cake));
+    }
     // TODO: Create a list of the eight Categories, using the names and colors
     // from above. Use a placeholder icon, such as `Icons.cake` for each
     // Category. We'll add custom icons later.
@@ -49,42 +65,7 @@ class CategoryRoute extends StatelessWidget {
     final listView = Container(
       color: _backgroundColor,
       padding: EdgeInsets.only(left: 8.0, right: 8.0),
-      child: ListView(
-        children: <Widget>[
-          Category(
-              name: _categoryNames[0],
-              color: _baseColors[0],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[1],
-              color: _baseColors[1],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[2],
-              color: _baseColors[2],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[3],
-              color: _baseColors[3],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[4],
-              color: _baseColors[4],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[5],
-              color: _baseColors[5],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[6],
-              color: _baseColors[6],
-              iconLocation: Icons.cake),
-          Category(
-              name: _categoryNames[7],
-              color: _baseColors[7],
-              iconLocation: Icons.cake)
-        ],
-      ),
+      child: _buildCategoryWidgets(categories)
     );
 
     // TODO: Create an App Bar
