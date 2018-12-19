@@ -3,7 +3,9 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+
 import 'category.dart';
+import 'unit.dart';
 
 final _backgroundColor = Colors.green[100];
 
@@ -39,44 +41,57 @@ class CategoryRoute extends StatelessWidget {
     Colors.red,
   ];
 
-
-Widget _buildCategoryWidgets(List<Widget> categories){
-  return ListView.builder(itemBuilder: (BuildContext context, int index) => categories[index],
+  /// Makes the correct number of rows for the list view.
+  ///
+  /// For portrait, we use a [ListView].
+  Widget _buildCategoryWidgets(List<Widget> categories) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) => categories[index],
       itemCount: categories.length,
-  );
-}
+    );
+  }
 
+  /// Returns a list of mock [Unit]s.
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-
     final categories = <Category>[];
 
-    for(var i = 0; i < _categoryNames.length; i++){
-      categories.add(Category(name: _categoryNames[i],
-          color: _baseColors[i],
-          iconLocation: Icons.cake));
+    for (var i = 0; i < _categoryNames.length; i++) {
+      categories.add(Category(
+        name: _categoryNames[i],
+        color: _baseColors[i],
+        iconLocation: Icons.cake,
+        units: _retrieveUnitList(_categoryNames[i]),
+      ));
     }
-    // TODO: Create a list of the eight Categories, using the names and colors
-    // from above. Use a placeholder icon, such as `Icons.cake` for each
-    // Category. We'll add custom icons later.
 
-    // TODO: Create a list view of the Categories
     final listView = Container(
       color: _backgroundColor,
-      padding: EdgeInsets.only(left: 8.0, right: 8.0),
-      child: _buildCategoryWidgets(categories)
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: _buildCategoryWidgets(categories),
     );
 
-    // TODO: Create an App Bar
     final appBar = AppBar(
-      backgroundColor: _backgroundColor,
+      elevation: 0.0,
       title: Text(
         'Unit Converter',
-        style: TextStyle(fontSize: 30.0, color: Colors.black),
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+        ),
       ),
       centerTitle: true,
-      elevation: 0.0,
+      backgroundColor: _backgroundColor,
     );
 
     return Scaffold(
